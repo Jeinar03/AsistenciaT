@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\CarreraController;
 use App\Http\Controllers\Admin\MateriaController;
 use App\Http\Controllers\Admin\GrupoController;
 use App\Http\Controllers\Maestro\AsistenciaController;
-
+use App\Http\Controllers\Admin\InscripcionController;
 
 
 Route::get('/', function () {
@@ -35,6 +35,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('carreras', CarreraController::class);
     Route::resource('materias', MateriaController::class);
     Route::resource('grupos', GrupoController::class);
+    Route::get('/grupos/{grupo}/inscripciones', [InscripcionController::class, 'index'])->name('inscripciones.index');
+Route::post('/grupos/{grupo}/inscripciones', [InscripcionController::class, 'inscribir'])->name('inscripciones.inscribir');
+Route::delete('/grupos/{grupo}/inscripciones/{alumno}', [InscripcionController::class, 'desinscribir'])->name('inscripciones.desinscribir');
 });
 // Rutas Maestro
 Route::middleware(['auth', 'role:maestro'])->prefix('maestro')->name('maestro.')->group(function () {
