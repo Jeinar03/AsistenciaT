@@ -7,6 +7,11 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Maestro\DashboardController as MaestroDashboard;
 use App\Http\Controllers\Admin\SemestreController;
 use App\Http\Controllers\Admin\CarreraController;
+use App\Http\Controllers\Admin\MateriaController;
+
+
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,6 +33,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('users', UserController::class);
     Route::resource('semestres', SemestreController::class);
     Route::resource('carreras', CarreraController::class);
+    Route::resource('materias', MateriaController::class);
 });
 // Rutas Maestro
 Route::middleware(['auth', 'role:maestro'])->prefix('maestro')->name('maestro.')->group(function () {
