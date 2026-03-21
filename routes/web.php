@@ -5,7 +5,8 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Maestro\DashboardController as MaestroDashboard;
-
+use App\Http\Controllers\Admin\SemestreController;
+use App\Http\Controllers\Admin\CarreraController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,8 +26,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
     Route::resource('users', UserController::class);
+    Route::resource('semestres', SemestreController::class);
+    Route::resource('carreras', CarreraController::class);
 });
-
 // Rutas Maestro
 Route::middleware(['auth', 'role:maestro'])->prefix('maestro')->name('maestro.')->group(function () {
     Route::get('/dashboard', [MaestroDashboard::class, 'index'])->name('dashboard');
