@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\SemestreController;
 use App\Http\Controllers\Admin\CarreraController;
 use App\Http\Controllers\Admin\MateriaController;
 use App\Http\Controllers\Admin\GrupoController;
-
+use App\Http\Controllers\Maestro\AsistenciaController;
 
 
 
@@ -39,6 +39,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 // Rutas Maestro
 Route::middleware(['auth', 'role:maestro'])->prefix('maestro')->name('maestro.')->group(function () {
     Route::get('/dashboard', [MaestroDashboard::class, 'index'])->name('dashboard');
+
+    // Asistencia
+    Route::get('/asistencia', [AsistenciaController::class, 'index'])->name('asistencia.index');
+    Route::get('/asistencia/{grupo}/sesiones', [AsistenciaController::class, 'sesiones'])->name('asistencia.sesiones');
+    Route::get('/asistencia/{sesion}/tomar', [AsistenciaController::class, 'tomar'])->name('asistencia.tomar');
+    Route::post('/asistencia/{sesion}/guardar', [AsistenciaController::class, 'guardar'])->name('asistencia.guardar');
+    Route::get('/asistencia/{grupo}/reporte', [AsistenciaController::class, 'reporte'])->name('asistencia.reporte');
 });
 
 // Rutas Alumno
