@@ -13,7 +13,7 @@ use App\Http\Controllers\Maestro\AsistenciaController;
 use App\Http\Controllers\Admin\InscripcionController;
 use App\Http\Controllers\Maestro\CriterioController;
 use App\Http\Controllers\Maestro\CalificacionController;
-
+use App\Http\Controllers\Alumno\DashboardController as AlumnoDashboard;
 
 Route::get('/', function () {
     return view('welcome');
@@ -63,9 +63,7 @@ Route::post('/grupos/{grupo}/calificaciones', [CalificacionController::class, 'g
 
 // Rutas Alumno
 Route::middleware(['auth', 'role:alumno'])->prefix('alumno')->name('alumno.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('alumno.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [AlumnoDashboard::class, 'index'])->name('dashboard');
 });
 
 require __DIR__.'/auth.php';
