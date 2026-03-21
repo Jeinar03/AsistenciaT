@@ -14,6 +14,10 @@ use App\Http\Controllers\Admin\InscripcionController;
 use App\Http\Controllers\Maestro\CriterioController;
 use App\Http\Controllers\Maestro\CalificacionController;
 use App\Http\Controllers\Alumno\DashboardController as AlumnoDashboard;
+use App\Http\Controllers\Alumno\MiAsistenciaController;
+use App\Http\Controllers\Alumno\MiCalificacionController;
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -64,6 +68,8 @@ Route::post('/grupos/{grupo}/calificaciones', [CalificacionController::class, 'g
 // Rutas Alumno
 Route::middleware(['auth', 'role:alumno'])->prefix('alumno')->name('alumno.')->group(function () {
     Route::get('/dashboard', [AlumnoDashboard::class, 'index'])->name('dashboard');
+    Route::get('/grupos/{grupo}/asistencia', [MiAsistenciaController::class, 'index'])->name('mi.asistencia');
+    Route::get('/grupos/{grupo}/calificaciones', [MiCalificacionController::class, 'index'])->name('mi.calificaciones');
 });
 
 require __DIR__.'/auth.php';

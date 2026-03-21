@@ -91,12 +91,12 @@
         .alert { padding: 14px 18px; border-radius: 12px; margin-bottom: 24px; font-size: 14px; }
         .alert-success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); color: #6ee7b7; }
         .grupos-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 20px;
         }
         .grupo-card {
             background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 16px; padding: 24px; transition: transform 0.2s;
+            border-radius: 16px; padding: 24px; transition: all 0.2s;
         }
         .grupo-card:hover { transform: translateY(-4px); }
         .grupo-header {
@@ -126,7 +126,14 @@
         .stat-item { flex: 1; text-align: center; }
         .stat-num { font-size: 20px; font-weight: 700; color: #a78bfa; }
         .stat-lbl { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
-        .grupo-actions { display: flex; gap: 8px; margin-top: 14px; }
+        .grupo-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+        .btn-alumnos {
+            flex: 1; padding: 8px; border-radius: 8px; text-align: center;
+            background: rgba(16,185,129,0.2); border: 1px solid rgba(16,185,129,0.3);
+            color: #6ee7b7; font-size: 12px; font-weight: 500;
+            text-decoration: none; transition: all 0.2s;
+        }
+        .btn-alumnos:hover { background: rgba(16,185,129,0.35); color: white; }
         .btn-edit {
             flex: 1; padding: 8px; border-radius: 8px; text-align: center;
             background: rgba(99,102,241,0.2); border: 1px solid rgba(99,102,241,0.3);
@@ -135,7 +142,7 @@
         }
         .btn-edit:hover { background: rgba(99,102,241,0.35); color: white; }
         .btn-delete {
-            padding: 8px 16px; border-radius: 8px;
+            padding: 8px 14px; border-radius: 8px;
             background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3);
             color: #fca5a5; font-size: 12px; font-weight: 500;
             cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s;
@@ -247,11 +254,16 @@
                     </div>
                 </div>
                 <div class="grupo-actions">
-                    <a href="{{ route('admin.grupos.edit', $grupo) }}" class="btn-edit">Editar</a>
+                    <a href="{{ route('admin.inscripciones.index', $grupo) }}" class="btn-alumnos">
+                        👥 Alumnos
+                    </a>
+                    <a href="{{ route('admin.grupos.edit', $grupo) }}" class="btn-edit">
+                        ✏️ Editar
+                    </a>
                     <form method="POST" action="{{ route('admin.grupos.destroy', $grupo) }}"
                           onsubmit="return confirm('¿Eliminar este grupo?')">
                         @csrf @method('DELETE')
-                        <button type="submit" class="btn-delete">Eliminar</button>
+                        <button type="submit" class="btn-delete">🗑</button>
                     </form>
                 </div>
             </div>

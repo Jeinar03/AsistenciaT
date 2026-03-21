@@ -208,6 +208,20 @@
                     @endif
                 </div>
                 <div class="materia-nombre">{{ $grupo->materia->nombre }}</div>
+                <div style="display:flex; gap:8px; margin-top:14px;">
+    <a href="{{ route('alumno.mi.asistencia', $grupo->id) }}"
+       style="flex:1; padding:8px; border-radius:8px; text-align:center;
+              background:rgba(16,185,129,0.2); border:1px solid rgba(16,185,129,0.3);
+              color:#6ee7b7; font-size:12px; font-weight:500; text-decoration:none;">
+        📋 Asistencia
+    </a>
+    <a href="{{ route('alumno.mi.calificaciones', $grupo->id) }}"
+       style="flex:1; padding:8px; border-radius:8px; text-align:center;
+              background:rgba(99,102,241,0.2); border:1px solid rgba(99,102,241,0.3);
+              color:#a78bfa; font-size:12px; font-weight:500; text-decoration:none;">
+        📊 Calificaciones
+    </a>
+</div>
                 <div class="materia-maestro">👨‍🏫 {{ $grupo->maestro->name }} · Grupo {{ $grupo->clave }}</div>
 
                 <div class="stats-row">
