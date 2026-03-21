@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Maestro\DashboardController as MaestroDashboard;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,9 +29,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
 // Rutas Maestro
 Route::middleware(['auth', 'role:maestro'])->prefix('maestro')->name('maestro.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('maestro.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [MaestroDashboard::class, 'index'])->name('dashboard');
 });
 
 // Rutas Alumno
