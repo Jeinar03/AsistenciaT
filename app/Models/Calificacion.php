@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Calificacion extends Model
 {
+    protected $table = 'calificaciones'; // ← agregar esta línea
+
     protected $fillable = [
         'criterio_id', 'alumno_id',
         'calificacion', 'comentario', 'registrado_por'

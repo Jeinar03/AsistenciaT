@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\MateriaController;
 use App\Http\Controllers\Admin\GrupoController;
 use App\Http\Controllers\Maestro\AsistenciaController;
 use App\Http\Controllers\Admin\InscripcionController;
+use App\Http\Controllers\Maestro\CriterioController;
+use App\Http\Controllers\Maestro\CalificacionController;
 
 
 Route::get('/', function () {
@@ -49,6 +51,14 @@ Route::middleware(['auth', 'role:maestro'])->prefix('maestro')->name('maestro.')
     Route::get('/asistencia/{sesion}/tomar', [AsistenciaController::class, 'tomar'])->name('asistencia.tomar');
     Route::post('/asistencia/{sesion}/guardar', [AsistenciaController::class, 'guardar'])->name('asistencia.guardar');
     Route::get('/asistencia/{grupo}/reporte', [AsistenciaController::class, 'reporte'])->name('asistencia.reporte');
+    // Criterios
+Route::get('/grupos/{grupo}/criterios', [CriterioController::class, 'index'])->name('criterios.index');
+Route::post('/grupos/{grupo}/criterios', [CriterioController::class, 'store'])->name('criterios.store');
+Route::delete('/grupos/{grupo}/criterios/{criterio}', [CriterioController::class, 'destroy'])->name('criterios.destroy');
+
+// Calificaciones
+Route::get('/grupos/{grupo}/calificaciones', [CalificacionController::class, 'index'])->name('calificaciones.index');
+Route::post('/grupos/{grupo}/calificaciones', [CalificacionController::class, 'guardar'])->name('calificaciones.guardar');
 });
 
 // Rutas Alumno

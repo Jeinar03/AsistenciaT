@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CriterioEvaluacion extends Model
 {
+    protected $table = 'criterios_evaluacion'; // ← agregar esta línea
+
     protected $fillable = [
         'grupo_id', 'nombre', 'peso',
         'tipo', 'fecha_entrega', 'orden'
