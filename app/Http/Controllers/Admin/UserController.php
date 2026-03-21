@@ -8,14 +8,13 @@ use App\Http\Requests\Admin\UpdateUserRequest;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use App\Services\AuditoriaService;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('roles')
-                     ->orderBy('created_at', 'desc')
-                     ->paginate(10);
+        $users = User::with('roles')->orderBy('created_at', 'desc')->paginate(10);
         $roles = Role::all();
         return view('admin.users.index', compact('users', 'roles'));
     }
@@ -37,11 +36,9 @@ class UserController extends Controller
             'tipo'      => $request->tipo,
             'activo'    => true,
         ]);
-
         $user->assignRole($request->role);
-
-        return redirect()->route('admin.users.index')
-                         ->with('success', 'Usuario creado exitosamente.');
+        AuditoriaService::registrar('crear', 'usuarios', 'Creo el usuario ' . $user->name);
+        return redirect()->route('admin.users.index')->with('success', 'Usuario creado exitosamente.');
     }
 
     public function edit(User $user)
@@ -60,16 +57,13 @@ class UserController extends Controller
             'tipo'      => $request->tipo,
             'activo'    => $request->boolean('activo'),
         ];
-
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->password);
         }
-
         $user->update($data);
         $user->syncRoles([$request->role]);
-
-        return redirect()->route('admin.users.index')
-                         ->with('success', 'Usuario actualizado exitosamente.');
+        AuditoriaService::registrar('editar', 'usuarios', 'Edito el usuario ' . $user->name);
+        return redirect()->route('admin.users.index')->with('success', 'Usuario actualizado exitosamente.');
     }
 
     public function destroy(User $user)
@@ -77,10 +71,8 @@ class UserController extends Controller
         if ($user->id === auth()->id()) {
             return back()->with('error', 'No puedes eliminar tu propio usuario.');
         }
-
+        AuditoriaService::registrar('eliminar', 'usuarios', 'Elimino el usuario ' . $user->name);
         $user->delete();
-
-        return redirect()->route('admin.users.index')
-                         ->with('success', 'Usuario eliminado exitosamente.');
+        return redirect()->route('admin.users.index')->with('success', 'Usuario eliminado exitosamente.');
     }
 }

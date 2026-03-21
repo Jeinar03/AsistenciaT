@@ -16,7 +16,7 @@ use App\Http\Controllers\Maestro\CalificacionController;
 use App\Http\Controllers\Alumno\DashboardController as AlumnoDashboard;
 use App\Http\Controllers\Alumno\MiAsistenciaController;
 use App\Http\Controllers\Alumno\MiCalificacionController;
-
+use App\Http\Controllers\Admin\AuditoriaController;
 
 
 Route::get('/', function () {
@@ -44,6 +44,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/grupos/{grupo}/inscripciones', [InscripcionController::class, 'index'])->name('inscripciones.index');
 Route::post('/grupos/{grupo}/inscripciones', [InscripcionController::class, 'inscribir'])->name('inscripciones.inscribir');
 Route::delete('/grupos/{grupo}/inscripciones/{alumno}', [InscripcionController::class, 'desinscribir'])->name('inscripciones.desinscribir');
+Route::get('/auditoria', [AuditoriaController::class, 'index'])->name('auditoria.index');
 });
 // Rutas Maestro
 Route::middleware(['auth', 'role:maestro'])->prefix('maestro')->name('maestro.')->group(function () {
