@@ -18,6 +18,7 @@ return new class extends Migration
         $table->timestamps();
         $table->unique(['grupo_id', 'alumno_id']);
     });
+
     }
 
     /**

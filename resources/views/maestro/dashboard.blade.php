@@ -243,7 +243,7 @@
     <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
     Tomar Asistencia
 </a>
-        <a href="#" class="sidebar-item">
+        <a href="{{ route('maestro.asistencia.index') }}" class="sidebar-item">
             <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
             Calificaciones
         </a>
@@ -306,7 +306,7 @@
                 <div class="grupo-semestre">{{ $grupo->semestre->nombre ?? 'Sin semestre' }}</div>
                 <div class="grupo-footer">
                    <a href="{{ route('maestro.asistencia.sesiones', $grupo->id) }}" class="btn-small btn-asistencia">Asistencia</a>
-                    <a href="#" class="btn-small btn-calificaciones">Calificaciones</a>
+                    <a href="{{ route('maestro.calificaciones.index', $grupo->id) }}" class="btn-small btn-calificaciones">Calificaciones</a>
                 </div>
             </div>
             @endforeach

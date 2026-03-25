@@ -13,6 +13,7 @@ use App\Http\Controllers\Maestro\AsistenciaController;
 use App\Http\Controllers\Admin\InscripcionController;
 use App\Http\Controllers\Maestro\CriterioController;
 use App\Http\Controllers\Maestro\CalificacionController;
+use App\Http\Controllers\Maestro\ReporteController;
 use App\Http\Controllers\Alumno\DashboardController as AlumnoDashboard;
 use App\Http\Controllers\Alumno\MiAsistenciaController;
 use App\Http\Controllers\Alumno\MiCalificacionController;
@@ -56,6 +57,8 @@ Route::middleware(['auth', 'role:maestro'])->prefix('maestro')->name('maestro.')
     Route::get('/asistencia/{sesion}/tomar', [AsistenciaController::class, 'tomar'])->name('asistencia.tomar');
     Route::post('/asistencia/{sesion}/guardar', [AsistenciaController::class, 'guardar'])->name('asistencia.guardar');
     Route::get('/asistencia/{grupo}/reporte', [AsistenciaController::class, 'reporte'])->name('asistencia.reporte');
+    Route::get('/grupos/{grupo}/reporte-asistencia-pdf', [ReporteController::class, 'asistenciaPdf'])->name('reporte.asistencia.pdf');
+    Route::get('/grupos/{grupo}/reporte-calificaciones-pdf', [ReporteController::class, 'calificacionesPdf'])->name('reporte.calificaciones.pdf');
     // Criterios
 Route::get('/grupos/{grupo}/criterios', [CriterioController::class, 'index'])->name('criterios.index');
 Route::post('/grupos/{grupo}/criterios', [CriterioController::class, 'store'])->name('criterios.store');
