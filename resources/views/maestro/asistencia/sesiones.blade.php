@@ -178,6 +178,7 @@
                 <div class="page-subtitle">{{ $grupo->materia->nombre }}</div>
             </div>
         </div>
+        <a href="{{ route('maestro.reporte.asistencia.pdf', $grupo) }}" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#ef4444,#dc2626);border-radius:12px;color:white;padding:10px 20px;font-size:14px;font-weight:600;text-decoration:none;box-shadow:0 4px 15px rgba(239,68,68,0.4);">?? Reporte PDF</a>
 
         @if(session('success'))
             <div class="alert alert-success">✅ {{ session('success') }}</div>
